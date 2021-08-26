@@ -73,27 +73,28 @@ export const manageGame = (state = initialGame, action) => {
                         opponentHP = opponentHP - 5
                         attackerHP = attackerHP + 1
                     }
-                }
+                } else {
 
-                let a = 0
-                let b = 0
+                    let a = 0
+                    let b = 0
 
-                action.results.forEach((num, i) => {
-                    if (num === 1 || num === 2 || num === 3) {
-                        a++
-                    } else if (num === 4 || num === 5) {
-                        b++
+                    action.results.forEach((num, i) => {
+                        if (num === 1 || num === 2 || num === 3) {
+                            a++
+                        } else if (num === 4 || num === 5) {
+                            b++
+                        }
+                    })
+
+                    if (a >= 3) {
+                        let damage = (a + 5) - 3
+                        console.log('1-3 damage', damage)
+                        opponentHP = opponentHP - damage
+                    } else if (b >= 3) {
+                        let heal = (b + 1) - 3
+                        console.log('4-5 heal', heal)
+                        attackerHP = attackerHP + heal
                     }
-                })
-
-                if (a >= 3) {
-                    let damage = (a + 5) - 3
-                    console.log('1-3 damage', damage)
-                    opponentHP = opponentHP - damage
-                } else if (b >= 3) {
-                    let heal = (b + 1) - 3
-                    console.log('4-5 heal', heal)
-                    attackerHP = attackerHP + heal
                 }
             }
 
