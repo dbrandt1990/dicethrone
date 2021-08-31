@@ -1,12 +1,21 @@
-import DiceContainer from "./containers/DiceContainer";
-import PlayersContainer from "./containers/PlayersContainer";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Login } from './components/Login';
+import { Signup } from './components/Signup';
+import { Ranks } from './components/Ranks';
+import GameContainer from './containers/GameContainer';
+import HomePage from './containers/Homepage';
 
 function App() {
   return (
-    <div className="App">
-      <DiceContainer />
-      <PlayersContainer />
-    </div>
+    <Router>
+      <div className="App">
+        <Route exact path='/' render={() => <HomePage />} />
+        <Route exact path='/signup' render={() => <Signup />} />
+        <Route exact path='/login' render={() => <Login />} />
+        <Route exact path='/ranks' render={() => <Ranks />} />
+        <Route exact path='/game' render={() => <GameContainer />} />
+      </div>
+    </Router>
   );
 }
 
