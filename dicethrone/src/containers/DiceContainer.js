@@ -6,14 +6,14 @@ class DiceContainer extends React.Component {
 
     handleClick = (e) => {
         //getting the number of the die from the id and making it the index value
-        let index = e.target.id[3] - 1
+        let index = e.currentTarget.id[3] - 1
         let clicks = this.props.clicked
         if (this.props.rolls > 1 && this.props.rolls < 4) {
             if (clicks[index]) {
-                e.target.className = `die${this.props.currentPlayer}`
+                e.currentTarget.className = `die${this.props.currentPlayer}`
                 clicks[index] = false
             } else {
-                e.target.className = 'die-clicked'
+                e.currentTarget.className = 'die-clicked'
                 clicks[index] = true
             }
 
@@ -23,7 +23,6 @@ class DiceContainer extends React.Component {
     }
 
     handleRoll = () => {
-        console.log(this.props.won)
         if (!this.props.won) {
             console.log('cicked in roll', this.props.clicked, 'rolls', this.props.rolls)
             if (this.props.rolls === 1) {

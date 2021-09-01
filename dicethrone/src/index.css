@@ -12,8 +12,17 @@ code {
     monospace;
 }
 
+span {
+  display: inline;
+  color: #FFFF9e;
+  margin: auto;
+  width: 50%;
+  padding: 6px;
+}
+
 .dieP1 {
   display: inline-block;
+  margin: auto;
   margin: 10px;
   padding: 10px;
   background-color: #4ABDAC;
@@ -31,21 +40,21 @@ code {
 }
 
 .die-clicked {
-  border: solid 3px #4ABDAC;
+  border: solid 3px #f1f1d2;
   display: inline-block;
   margin: 7px;
   padding: 10px;
-  background-color: #FFFF9e;
+  background-color: #f5b9a8;
   width: 50px;
   height: 50px;
 }
 
 .dieP1:active {
-  background-color: #FFFF9e;
+  background-color: #f1f1d2;
 }
 
 .dieP2:active {
-  background-color: #FFFF9e;
+  background-color: #f1f1d2;
 }
 
 .finishHighlight {
