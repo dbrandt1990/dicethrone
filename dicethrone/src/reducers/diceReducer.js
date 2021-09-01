@@ -50,7 +50,25 @@ export const manageGame = (state = initialGame, action) => {
             let results = JSON.stringify(action.results.sort())
             let set = new Set(action.results)
             let smStraightSetCheck = Array.from(set)
+            let a = 0
+            let b = 0
+
             console.log('RESOLV_DICE called', results)
+
+            if (smStraightSetCheck[3]) {
+                let count = 0
+                smStraightSetCheck.forEach((num, i) => {
+                    if (num + 1 === smStraightSetCheck[i + 1]) {
+                        count++
+                    }
+                })
+
+                if (count === 3) {
+                    console.log('small straight = 5dmg + 1hp')
+                    opponentHP = opponentHP - 5
+                    attackerHP = attackerHP + 1
+                }
+            }
 
             if (results === JSON.stringify([6, 6, 6, 6, 6])) {
                 console.log('6 X5 = 18dmg')
@@ -60,41 +78,24 @@ export const manageGame = (state = initialGame, action) => {
                 opponentHP = opponentHP - 7
                 attackerHP = attackerHP + 2
             } else {
-                if (smStraightSetCheck[3]) {
-                    let count = 0
-                    smStraightSetCheck.forEach((num, i) => {
-                        if (num + 1 === smStraightSetCheck[i + 1]) {
-                            count++
-                            console.log('straightcheck count', count)
-                        }
-                    })
-                    if (count === 3) {
-                        console.log('small straight = 5dmg + 1hp')
-                        opponentHP = opponentHP - 5
-                        attackerHP = attackerHP + 1
+                action.results.forEach((num) => {
+                    if (num === 1 || num === 2 || num === 3) {
+                        a++
+                        console.log('a', a)
+                    } else if (num === 4 || num === 5) {
+                        b++
+                        console.log('b', b)
                     }
-                } else {
+                })
 
-                    let a = 0
-                    let b = 0
-
-                    action.results.forEach((num, i) => {
-                        if (num === 1 || num === 2 || num === 3) {
-                            a++
-                        } else if (num === 4 || num === 5) {
-                            b++
-                        }
-                    })
-
-                    if (a >= 3) {
-                        let damage = (a + 5) - 3
-                        console.log('1-3 damage', damage)
-                        opponentHP = opponentHP - damage
-                    } else if (b >= 3) {
-                        let heal = (b + 1) - 3
-                        console.log('4-5 heal', heal)
-                        attackerHP = attackerHP + heal
-                    }
+                if (a > 2) {
+                    let damage = (a + 5) - 3
+                    console.log('1-3 damage', damage)
+                    opponentHP = opponentHP - damage
+                } else if (b > 2) {
+                    let heal = (b + 1) - 3
+                    console.log('4-5 heal', heal)
+                    attackerHP = attackerHP + heal
                 }
             }
 
@@ -156,6 +157,3 @@ export const manageUsers = (state = initialUser, action) => {
             return state
     }
 }
-
-
-
