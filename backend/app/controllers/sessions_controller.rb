@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
         else alert('try again or click sign up')
     end
 
+
     def destroy
         session.clear
     end
