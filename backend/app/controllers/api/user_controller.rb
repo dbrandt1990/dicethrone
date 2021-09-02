@@ -2,11 +2,11 @@ class Api::UserController < ApplicationController
 
     def create 
         @user = User.new(user_params)
-        # idk wtf is going on here syntax errors, and unable to get anything to return from this other than the else 
+        # byebug
         if @user.save 
-            return json: {status: :created, user: @user}
+            render json: {status: :created, user: @user}
         else
-            return json: {status:500, user: @user.errors.full_messages }
+            render json: {status:500, user: @user.errors.full_messages }
         end
     end
     def delete
@@ -24,6 +24,6 @@ class Api::UserController < ApplicationController
     private 
 
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.require(:user).permit(:username, :password_digest)
     end
 end

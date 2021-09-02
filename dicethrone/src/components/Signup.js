@@ -12,8 +12,8 @@ class Signup extends React.Component {
         }
     }
 
-    createUser(username, password) {
-        const bodyData = { username, password }
+    createUser(username, password_digest) {
+        const bodyData = { username, password_digest }
         const data = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -22,6 +22,7 @@ class Signup extends React.Component {
 
         fetch(SIGNUP_URL, data)
             .then(response => response.json())
+            .then(user => console.log('db data', user))
     }
 
     handleChange = (e) => {
@@ -47,7 +48,8 @@ class Signup extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <h3>Sign Up</h3>
                     <input onChange={this.handleChange} type='text' name='username' placeholder='username' />
-                    <input onChange={this.handleChange} type='password' name='password' placeholder='password' />
+                    <input onChange={this.handleChange} type='text' name='password' placeholder='password' />
+                    {/* change the type ^^^ to password, set to texxt to avoid chrome saving */}
                     <button type='submit'>Create User</button>
                 </form>
             </div>
