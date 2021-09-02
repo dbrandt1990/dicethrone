@@ -71,8 +71,8 @@ export const manageGame = (state = initialGame, action) => {
             }
 
             if (results === JSON.stringify([6, 6, 6, 6, 6])) {
-                console.log('6 X5 = 18dmg')
-                opponentHP = opponentHP - 18
+                console.log('6 X5 = 20dmg')
+                opponentHP = opponentHP - 20
             } else if (results === JSON.stringify([1, 2, 3, 4, 5]) || results === JSON.stringify([2, 3, 4, 5, 6])) {
                 console.log('lg straight = 7dmg + 2hp')
                 opponentHP = opponentHP - 7

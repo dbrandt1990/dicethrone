@@ -2,9 +2,9 @@ import React from 'react'
 
 export const Dice = (props) => {
     let player = props.currentPlayer === 'P1' ? 'dieP1' : 'dieP2'
-    let bolt = "fas fa-bolt"
-    let skull = "fas fa-skull-crossbones"
-    let heart = "fas fa-heart"
+    let bolt = "fas fa-bolt fa-2x"
+    let skull = "fas fa-skull-crossbones fa-2x"
+    let heart = "fas fa-heart fa-2x"
 
     const setSymbol = (result) => {
         if (result < 4 && result > 0) { return bolt }

@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+span {
+  display: inline;
+  color: #FFFF9e;
+  margin: auto;
+  width: 50%;
+  padding: 6px;
+}
+
 .dieP1 {
   display: inline-block;
   margin: 10px;
