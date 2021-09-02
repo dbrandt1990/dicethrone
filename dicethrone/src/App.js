@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import { Ranks } from './components/Ranks';
@@ -9,11 +9,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Route exact path='/' render={() => <HomePage />} />
-        <Route exact path='/signup' render={() => <Signup />} />
-        <Route exact path='/login' render={() => <Login />} />
-        <Route exact path='/ranks' render={() => <Ranks />} />
-        <Route exact path='/game' render={() => <GameContainer />} />
+        <Switch>
+          <Route exact path='/' render={() => <HomePage />} />
+          <Route exact path='/signup' render={() => <Signup />} />
+          <Route exact path='/login' render={() => <Login />} />
+          <Route exact path='/ranks' render={() => <Ranks />} />
+          <Route exact path='/game' render={() => <GameContainer />} />
+        </Switch>
       </div>
     </Router>
   );

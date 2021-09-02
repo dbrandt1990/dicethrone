@@ -50,13 +50,14 @@ export const manageGame = (state = initialGame, action) => {
             let results = JSON.stringify(action.results.sort())
             let set = new Set(action.results)
             let smStraightSetCheck = Array.from(set)
-            let a = 0
-            let b = 0
+            let a = 0 //1-3
+            let b = 0 //4-5
+            let count = 0 //smStraight count
+
 
             console.log('RESOLV_DICE called', results)
 
             if (smStraightSetCheck[3]) {
-                let count = 0
                 smStraightSetCheck.forEach((num, i) => {
                     if (num + 1 === smStraightSetCheck[i + 1]) {
                         count++
@@ -77,7 +78,7 @@ export const manageGame = (state = initialGame, action) => {
                 console.log('lg straight = 7dmg + 2hp')
                 opponentHP = opponentHP - 7
                 attackerHP = attackerHP + 2
-            } else {
+            } else if (count < 4) {
                 action.results.forEach((num) => {
                     if (num === 1 || num === 2 || num === 3) {
                         a++
