@@ -10,10 +10,10 @@ class DiceContainer extends React.Component {
         let clicks = this.props.clicked
         if (this.props.rolls > 1 && this.props.rolls < 4) {
             if (clicks[index]) {
-                e.target.className = `die${this.props.currentPlayer}`
+                e.currentTarget.className = `die${this.props.currentPlayer}`
                 clicks[index] = false
             } else {
-                e.target.className = 'die-clicked'
+                e.currentTarget.className = 'die-clicked'
                 clicks[index] = true
             }
 
