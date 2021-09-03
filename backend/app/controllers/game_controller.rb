@@ -1,9 +1,12 @@
 class GameController < ApplicationController
+
     def create
         game = Game.new(game_params)
         
-        if !game.save
-            alert('there was an issue creating your game')
+        if game.save
+            render json: {status: :created, game: game}
+        else
+            render json: {status:500, errors: game.errors.full_messages }
         end
     end
 

@@ -1,12 +1,12 @@
 class Api::UserController < ApplicationController
 
     def create 
-        @user = User.new(user_params)
+        user = User.new(user_params)
         # byebug
-        if @user.save 
-            render json: {status: :created, user: @user}
+        if user.save 
+            render json: {status: :created, user: user}
         else
-            render json: {status:500, user: @user.errors.full_messages }
+            render json: {status:500, errors: user.errors.full_messages }
         end
     end
     def delete

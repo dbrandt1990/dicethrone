@@ -1,6 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-const SIGNUP_URL = "http://localhost:3000/api/user"
 
 class Signup extends React.Component {
     constructor(props) {
@@ -12,26 +12,13 @@ class Signup extends React.Component {
         }
     }
 
-    createUser(username, password_digest) {
-        const bodyData = { username, password_digest }
-        const data = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bodyData)
-        }
-
-        fetch(SIGNUP_URL, data)
-            .then(response => response.json())
-            .then(user => console.log('db data', user))
-    }
-
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.createUser(this.state.username, this.state.password)
+        this.props.createUser(this.state.username, this.state.password)
         this.setState({
             username: '',
             password: '',
@@ -57,4 +44,10 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createUser: (username, password) => dispatch({ type: 'SIGN_UP', username, password })
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Signup)

@@ -149,7 +149,23 @@ export const manageGame = (state = initialGame, action) => {
 export const manageUsers = (state = initialUser, action) => {
     switch (action.type) {
         case 'SIGN_UP': {
-            return {}
+            const SIGNUP_URL = "http://localhost:3000/api/user"
+            let username = action.username
+            let password_digest = action.password
+            const bodyData = { username, password_digest }
+            const data = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(bodyData)
+            }
+
+            fetch(SIGNUP_URL, data)
+                .then(response => response.json())
+                .then(user => {
+                    if (user) { alert('user created') }
+                    console.log('db data', user)
+                    return user
+                })
         }
         case 'SIGN_IN': {
             return {}
