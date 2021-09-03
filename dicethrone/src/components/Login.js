@@ -1,7 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-const SESSION_URL = 'http://localhost:3000/api/session'
-
+import { connect } from 'react-redux'
 class Login extends React.Component {
     constructor(props) {
         super(props)
@@ -10,21 +9,8 @@ class Login extends React.Component {
             password1: '',
             username2: '',
             password2: '',
-            session_created: false
+            game_created: false
         }
-    }
-
-    loginPlayers(username1, password1, username2, password2) {
-        const bodyData = { username1, password1, username2, password2 }
-        const data = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bodyData)
-        }
-
-        fetch(SESSION_URL, data)
-            .then(response => response.json())
-            .then(session => console.log('db data', session))
     }
 
     handleChange = (e) => {
@@ -39,12 +25,12 @@ class Login extends React.Component {
             password1: '',
             username2: '',
             password2: '',
-            session_created: true
+            game_created: true
         })
     }
 
     render() {
-        if (this.state.session_created) {
+        if (this.state.game_created) {
             return <Redirect to='/game' />
         }
         return (
@@ -53,10 +39,10 @@ class Login extends React.Component {
                     <h3>Login</h3>
                     <label>Player 1: </label>
                     <input onChange={this.handleChange} type='text' name='username1' placeholder='username' />
-                    <input onChange={this.handleChange} type='password' name='password1' placeholder='password' /><br />
+                    {/* <input onChange={this.handleChange} type='password' name='password1' placeholder='password' /><br /> */}
                     <label>Player 2: </label>
                     <input onChange={this.handleChange} type='text' name='username2' placeholder='username' />
-                    <input onChange={this.handleChange} type='password' name='password2' placeholder='password' /><br />
+                    {/* <input onChange={this.handleChange} type='password' name='password2' placeholder='password' /><br /> */}
                     <button type='submit'>Start Game</button>
                 </form>
             </div>
@@ -64,4 +50,11 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+const mapDispatchToProps = (dispatch) => {
+    return {
+        verifyUsers: () => dispatch({ type: 'FIND_USERS' }),
+        createGame: () => dispatch({ type: 'CREATE_GAME', })
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login)

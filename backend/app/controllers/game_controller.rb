@@ -1,7 +1,10 @@
 class GameController < ApplicationController
 
     def create
-        game = Game.new(game_params)
+        let P1 = User.find_by({ username: action.username1 })
+        let P2 = User.find_by({ username: action.username2 })
+        
+        if(P1 && P2){ game = Game.new(game_params)}
         
         if game.save
             render json: {status: :created, game: game}

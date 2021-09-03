@@ -44,6 +44,23 @@ export const manageDice = (state = initialDice, action) => {
 
 export const manageGame = (state = initialGame, action) => {
     switch (action.type) {
+        case 'CREATE_GAME': {
+
+            const GAME_URL = "http://localhost:3000/api/game"
+            const bodyData = {}
+            const data = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(bodyData)
+            }
+
+            fetch(GAME_URL, data)
+                .then(response => response.json())
+                .then(game => {
+                    console.log('game created', game)
+                    return game
+                })
+        }
         case 'RESOLVE_DICE': {
             let opponentHP = state.turn === 'P1' ? state.P2HP : state.P1HP
             let attackerHP = state.turn === 'P1' ? state.P1HP : state.P2HP
@@ -166,9 +183,6 @@ export const manageUsers = (state = initialUser, action) => {
                     console.log('db data', user)
                     return user
                 })
-        }
-        case 'SIGN_IN': {
-            return {}
         }
         default:
             return state
