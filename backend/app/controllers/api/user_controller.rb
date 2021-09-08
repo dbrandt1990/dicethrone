@@ -1,5 +1,13 @@
 class Api::UserController < ApplicationController
 
+    
+    def self.findUsers(user1,user2)
+        a = User.find_by(username: user1)
+        b = User.find_by(username: user2)
+
+        return {user1: a, user2: b}
+    end
+
     def create 
         user = User.new(user_params)
         # byebug
@@ -9,8 +17,11 @@ class Api::UserController < ApplicationController
             render json: {status:500, errors: user.errors.full_messages }
         end
     end
+
+
     def delete
     end
+
     def calculateRank
         let ratios = {}
         User.all.each do |user|

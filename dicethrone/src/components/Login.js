@@ -6,9 +6,7 @@ class Login extends React.Component {
         super(props)
         this.state = {
             username1: '',
-            password1: '',
             username2: '',
-            password2: '',
             game_created: false
         }
     }
@@ -19,30 +17,26 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.loginPlayers(this.state.username1, this.state.password1, this.state.username2, this.state.password2)
+        this.props.createGame(this.state.username1, this.state.username2, null, null)
         this.setState({
             username1: '',
-            password1: '',
             username2: '',
-            password2: '',
             game_created: true
         })
     }
 
     render() {
-        if (this.state.game_created) {
+        if (this.state.user1 !== 'Player 1' && this.state.user2 !== 'Player 2') {
             return <Redirect to='/game' />
         }
         return (
             <div id='login'>
-                <form onSubmit={() => { }}>
+                <form onSubmit={this.handleSubmit}>
                     <h3>Login</h3>
                     <label>Player 1: </label>
                     <input onChange={this.handleChange} type='text' name='username1' placeholder='username' />
-                    {/* <input onChange={this.handleChange} type='password' name='password1' placeholder='password' /><br /> */}
                     <label>Player 2: </label>
                     <input onChange={this.handleChange} type='text' name='username2' placeholder='username' />
-                    {/* <input onChange={this.handleChange} type='password' name='password2' placeholder='password' /><br /> */}
                     <button type='submit'>Start Game</button>
                 </form>
             </div>
@@ -50,11 +44,17 @@ class Login extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        verifyUsers: () => dispatch({ type: 'FIND_USERS' }),
-        createGame: () => dispatch({ type: 'CREATE_GAME', })
+        user1: state.manageGame.P1_username,
+        user2: state.manageGame.P2_username
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createGame: (P1, P2) => dispatch({ type: 'CREATE_GAME', P1, P2 })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

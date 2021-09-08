@@ -8,7 +8,7 @@ class HomePage extends React.Component {
             <div id='homepage'>
                 <h1>WELCOME TO DICETHRONE-lite</h1>
                 <NavLink to='/signup'>Sign Up</NavLink>
-                <NavLink to='/login'>Login</NavLink>
+                <NavLink to='/login'>Start Game</NavLink>
                 <NavLink to='/ranks'>Leader Board</NavLink>
             </div>
         )

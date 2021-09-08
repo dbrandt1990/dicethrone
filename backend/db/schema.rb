@@ -13,6 +13,8 @@
 ActiveRecord::Schema.define(version: 2021_08_30_015114) do
 
   create_table "games", force: :cascade do |t|
+    t.string "P1_username"
+    t.string "P2_username"
     t.integer "P1_id"
     t.integer "P2_id"
     t.boolean "won"
@@ -20,7 +22,6 @@ ActiveRecord::Schema.define(version: 2021_08_30_015114) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "password_digest"
     t.integer "rank"
     t.integer "wins"
     t.integer "losses"

@@ -1,5 +1,5 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
-const initialGame = { turn: 'P1', P1HP: 20, P2HP: 20, won: false }
+const initialGame = { turn: 'P1', P1_username: "Player 1", P2_username: "Player 2", P1HP: 20, P2HP: 20, won: false }
 const initialUser = { username: '', password: '' }//may need to add games array and wins/rank here
 
 
@@ -45,9 +45,10 @@ export const manageDice = (state = initialDice, action) => {
 export const manageGame = (state = initialGame, action) => {
     switch (action.type) {
         case 'CREATE_GAME': {
-
+            let P1 = action.P1
+            let P2 = action.P2
             const GAME_URL = "http://localhost:3000/api/game"
-            const bodyData = {}
+            const bodyData = { P1, P2 }
             const data = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -60,6 +61,11 @@ export const manageGame = (state = initialGame, action) => {
                     console.log('game created', game)
                     return game
                 })
+            return state = {
+                ...state,
+                P1_username: P1,
+                P2_username: P2
+            }
         }
         case 'RESOLVE_DICE': {
             let opponentHP = state.turn === 'P1' ? state.P2HP : state.P1HP
@@ -168,8 +174,7 @@ export const manageUsers = (state = initialUser, action) => {
         case 'SIGN_UP': {
             const SIGNUP_URL = "http://localhost:3000/api/user"
             let username = action.username
-            let password_digest = action.password
-            const bodyData = { username, password_digest }
+            const bodyData = { username }
             const data = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
