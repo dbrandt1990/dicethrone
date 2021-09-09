@@ -1,5 +1,5 @@
 class Api::GameController < ApplicationController
-
+# ! maybe remove this completley if Game model is removed
     def create
        p1 = User.find_by(username: params[:P1].strip)
        p2 = User.find_by(username: params[:P2].strip)
@@ -11,6 +11,8 @@ class Api::GameController < ApplicationController
             else
                 render json: {status:500, errors: game.errors.full_messages }
             end
+        else
+            render json: {status: 401, errors: "One or more users does not exist"}
         end
     end
 

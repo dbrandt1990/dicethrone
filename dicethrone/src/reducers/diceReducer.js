@@ -47,20 +47,15 @@ export const manageGame = (state = initialGame, action) => {
         case 'CREATE_GAME': {
             let P1 = action.P1
             let P2 = action.P2
-            const GAME_URL = "http://localhost:3000/api/game"
-            const bodyData = { P1, P2 }
-            const data = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(bodyData)
-            }
+            //! think about gettting rid of game object in db and just validating users and updating wins
+            // const URL = "http://localhost:3000/api/user"
 
-            fetch(GAME_URL, data)
-                .then(response => response.json())
-                .then(game => {
-                    console.log('game created', game)
-                    return game
-                })
+            // fetch(URL)
+            //     .then(response => response.json())
+            //     .then(users => {
+            //         return console.log('users confirming', users)
+            //     })
+
             return state = {
                 ...state,
                 P1_username: P1,

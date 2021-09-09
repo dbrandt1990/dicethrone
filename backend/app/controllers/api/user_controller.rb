@@ -1,11 +1,9 @@
 class Api::UserController < ApplicationController
 
     
-    def self.findUsers(user1,user2)
-        a = User.find_by(username: user1)
-        b = User.find_by(username: user2)
-
-        return {user1: a, user2: b}
+    def index 
+       users = User.all
+       render json: {users: users}
     end
 
     def create 
@@ -35,6 +33,6 @@ class Api::UserController < ApplicationController
     private 
 
     def user_params
-        params.require(:user).permit(:username, :password_digest)
+        params.require(:user).permit(:username)
     end
 end
