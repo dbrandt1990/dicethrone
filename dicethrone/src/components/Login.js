@@ -15,12 +15,17 @@ class Login extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    fetchUsers = () => {
-        return fetch("http://localhost:3000/api/user")
+    fetchUsers = (user1, user2) => {
+        return fetch("http://localhost:3000/api/user", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
             .then(response => response.json())
             .then(users => {
-                console.log('fetched users', users)
-                return users
+                console.log('fetched users', users.users)
+                return this.props.confirmUsers(user1, user2, users.users)
             })
     }
 
@@ -28,19 +33,11 @@ class Login extends React.Component {
         e.preventDefault()
         let P1 = this.state.username1
         let P2 = this.state.username2
-        let users = this.fetchUsers()
-        // ! look at async request to wait for the users to fetch, check if users are included and then create the game
-        console.log("Users", users)
-        let P1_confirmed = Object.keys(users).some((key) => {
-            return users[key].includes(P1)
-        })
-        let P2_confirmed = Object.keys(users).some((key) => {
-            return users[key].includes(P2)
-        })
-        console.log(P1_confirmed)
+        let fetched = this.fetchUsers(P1, P2)
 
-        this.props.createGame(this.state.username1, this.state.username2)
-        if (this.state.username1 !== '' && this.state.username2 !== '' && P1_confirmed && P2_confirmed)
+        console.log('fetch in varible', fetched)
+
+        if (this.state.username1 !== '' && this.state.username2 !== '')
             this.setState({
                 username1: '',
                 username2: '',
@@ -71,6 +68,7 @@ class Login extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        confirmUsers: (P1, P2, allUsersArr) => dispatch({ type: 'CONFIRM_USERS', P1, P2, allUsersArr }),
         createGame: (P1, P2) => dispatch({ type: 'CREATE_GAME', P1, P2 })
     }
 }

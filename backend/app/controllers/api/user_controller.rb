@@ -3,7 +3,7 @@ class Api::UserController < ApplicationController
     
     def index 
        users = User.all
-       render json: {users: users}
+       render json: {status: :success, users: users}
     end
 
     def create 
@@ -14,6 +14,10 @@ class Api::UserController < ApplicationController
         else
             render json: {status:500, errors: user.errors.full_messages }
         end
+    end
+
+    def getUsers
+        
     end
 
 

@@ -1,7 +1,6 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
-const initialGame = { turn: 'P1', P1_username: "Player 1", P2_username: "Player 2", P1HP: 20, P2HP: 20, won: false }
-const initialUser = { username: '', password: '' }//may need to add games array and wins/rank here
-
+const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false }
+const initialUser = { username: '' }//may need to add games array and wins/rank here
 
 export const manageDice = (state = initialDice, action) => {
     switch (action.type) {
@@ -44,22 +43,20 @@ export const manageDice = (state = initialDice, action) => {
 
 export const manageGame = (state = initialGame, action) => {
     switch (action.type) {
-        case 'CREATE_GAME': {
+        case 'CONFIRM_USERS': {
             let P1 = action.P1
             let P2 = action.P2
-            //! think about gettting rid of game object in db and just validating users and updating wins
-            // const URL = "http://localhost:3000/api/user"
-
-            // fetch(URL)
-            //     .then(response => response.json())
-            //     .then(users => {
-            //         return console.log('users confirming', users)
-            //     })
-
+            let users = action.allUsersArr
+            let P1_confirmed = users.filter(user => {
+                return user.username === P1
+            })
+            let P2_confirmed = users.filter(user => {
+                return user.username === P2
+            })
             return state = {
                 ...state,
-                P1_username: P1,
-                P2_username: P2
+                P1: P1_confirmed[0],
+                P2: P2_confirmed[0]
             }
         }
         case 'RESOLVE_DICE': {

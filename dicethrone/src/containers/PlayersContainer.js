@@ -9,8 +9,8 @@ class PlayersContainer extends React.Component {
         return (
             <div id='playerscontainer'>
                 <h1>{this.props.status}</h1>
-                <Player id='P1cont' won={this.props.won} player="P1" name={this.props.P1_username} hp={this.props.P1HP} />
-                <Player id='P2cont' won={this.props.won} player="P2" name={this.props.P2_username} hp={this.props.P2HP} />
+                <Player id='P1cont' won={this.props.won} player="P1" name={this.props.P1_name} hp={this.props.P1HP} />
+                <Player id='P2cont' won={this.props.won} player="P2" name={this.props.P2_name} hp={this.props.P2HP} />
             </div>
         )
     }
@@ -19,8 +19,8 @@ class PlayersContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         gameStatus: state.manageGame.status,
-        P1_username: state.manageGame.P1_username,
-        P2_username: state.manageGame.P2_username,
+        P1_name: state.manageGame.P1.username,
+        P2_name: state.manageGame.P2.username,
         P1HP: state.manageGame.P1HP,
         P2HP: state.manageGame.P2HP,
         currPlayer: state.manageGame.turn,

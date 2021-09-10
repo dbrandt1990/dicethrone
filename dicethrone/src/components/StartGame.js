@@ -17,8 +17,8 @@ class StartGame extends React.Component {
     }
 
     confirmedUsers = () => {
-
-        if (this.state.start) {
+        console.log('User1', this.props.user1, 'User2', this.props.user2)
+        if (this.state.start && typeof this.props.user1 === 'object' && typeof this.props.user2 === 'object') {
             return <Redirect to='/game' />
         }
     }
@@ -37,8 +37,8 @@ class StartGame extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        user1: state.manageGame.P1_username,
-        user2: state.manageGame.P2_username
+        user1: state.manageGame.P1,
+        user2: state.manageGame.P2
     }
 }
 
