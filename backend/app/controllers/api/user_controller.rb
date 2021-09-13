@@ -16,14 +16,6 @@ class Api::UserController < ApplicationController
         end
     end
 
-    def getUsers
-        
-    end
-
-
-    def delete
-    end
-
     def calculateRank
         let ratios = {}
         User.all.each do |user|

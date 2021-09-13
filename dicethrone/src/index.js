@@ -5,10 +5,10 @@ import App from './App';
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
-import { manageDice, manageUsers, manageGame } from './reducers/diceReducer';
+import { manageRanks, manageDice, manageUsers, manageGame } from './reducers/diceReducer';
 
 
-const rootReducer = combineReducers({ manageDice, manageUsers, manageGame })
+const rootReducer = combineReducers({ manageRanks, manageDice, manageUsers, manageGame })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(

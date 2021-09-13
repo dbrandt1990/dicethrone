@@ -22,7 +22,8 @@ class DiceContainer extends React.Component {
         this.props.chooseDice(clicks)
     }
 
-    handleRoll = () => {
+    handleRoll = (e) => {
+        e.preventDefault()
         if (!this.props.won) {
             console.log('cicked in roll', this.props.clicked, 'rolls', this.props.rolls)
             if (this.props.rolls === 1) {
@@ -36,7 +37,8 @@ class DiceContainer extends React.Component {
 
     }
 
-    finishTurn = () => {
+    finishTurn = (e) => {
+        e.preventDefault()
         if (!this.props.won && this.props.rolls > 1) {
             document.querySelector('#finishTurn').className = 'finish'
 
@@ -54,7 +56,7 @@ class DiceContainer extends React.Component {
         return (
             <div id='dicecontainer'>
                 <Dice currentPlayer={this.props.currentPlayer} handleClick={this.handleClick} results={this.props.results} />
-                <button onClick={this.handleRoll}>Roll</button>
+                <button id='roll' onClick={this.handleRoll}>Roll</button>
                 <button id='finishTurn' onClick={this.finishTurn}>Finish</button>
             </div>
         )

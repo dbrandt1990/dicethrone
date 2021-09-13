@@ -1,6 +1,7 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
 const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false }
-const initialUser = { username: '' }//may need to add games array and wins/rank here
+const initialUser = { username: '' }
+const initialLeaderBoard = { ranks: [] }
 
 export const manageDice = (state = initialDice, action) => {
     switch (action.type) {
@@ -155,12 +156,12 @@ export const manageGame = (state = initialGame, action) => {
                     ...state,
                     won: true
                 })
+            } else {
+                return state
             }
         }
         case 'RESET_STATE': {
-            console.log('before', state)
-            state = initialGame
-            console.log('after', state)
+            return state = initialGame
         }
         default:
             return state
@@ -186,10 +187,25 @@ export const manageUsers = (state = initialUser, action) => {
                     if (user) { alert('user created') }
                     console.log('db data', user)
                     return user
-                })
+                }).catch(err => console.log(err.full_messages))
+            break
         }
         default:
             return state
+    }
+}
+
+export const manageRanks = (state = initialLeaderBoard, action) => {
+    switch (action.type) {
+        case 'GET_RANKS': {
+            return state = {
+                ranks: action.sortedUsers
+            }
+        }
+
+        default:
+            return state
+
     }
 }
 

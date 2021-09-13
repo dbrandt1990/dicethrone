@@ -11,7 +11,8 @@ class GameContainer extends React.Component {
     gameWon = () => {
         return <Redirect to='/winner' />
     }
-    handleExit = () => {
+    handleExit = (e) => {
+        e.preventDefault()
         this.props.resetState()
         return <Redirect to='/' />
     }
@@ -21,7 +22,7 @@ class GameContainer extends React.Component {
             <div id="gameContainer" >
                 <DiceContainer />
                 <PlayersContainer />
-                <button onClick={this.handleExit}>Exit</button>
+                <button id='exitGame' onClick={this.handleExit}>Exit</button>
             </div>
         )
     }

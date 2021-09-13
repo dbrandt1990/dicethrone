@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import { Ranks } from './components/Ranks';
+import Ranks from './components/Ranks';
 import GameContainer from './containers/GameContainer';
 import HomePage from './containers/Homepage';
 import StartGame from './components/StartGame';
