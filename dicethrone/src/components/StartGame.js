@@ -6,6 +6,7 @@ const StartGame = (props) => {
 
     const confirmedUsers = () => {
         console.log('User1', props.user1, 'User2', props.user2)
+
         if (typeof props.user1 === 'object' && typeof props.user2 === 'object') {
             return <Redirect to='/game' />
         }

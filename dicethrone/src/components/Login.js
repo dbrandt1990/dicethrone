@@ -14,7 +14,7 @@ class Login extends React.Component {
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
-
+    // ! think about moving this to the homepage, gabbing users and putting them in the state, and just confirming them here to help with server issuses
     async fetchUsers(user1, user2) {
         return fetch("http://localhost:3000/api/user", {
             headers: {
@@ -37,10 +37,6 @@ class Login extends React.Component {
         let P1 = this.state.username1
         let P2 = this.state.username2
         this.fetchUsers(P1, P2)
-
-        // setTimeout(() => {
-        // }, 3000);
-
 
         if (this.state.username1 !== '' && this.state.username2 !== '')
             this.setState({

@@ -7,7 +7,7 @@ import { Redirect } from 'react-router'
 
 
 class GameContainer extends React.Component {
-    // !redirect to winners page 
+    // !redirect to winners page, do all user updates there?
     gameWon = () => {
         return <Redirect to='/winner' />
     }

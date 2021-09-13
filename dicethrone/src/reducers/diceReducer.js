@@ -151,11 +151,31 @@ export const manageGame = (state = initialGame, action) => {
 
         }
         case 'WIN_GAME': {
+            // ! do a patch request after game is exited to update in db
+            let P1 = state.P1
+            let P2 = state.P2
             if (state.P1HP <= 0 || state.P2HP <= 0) {
-                return (state = {
-                    ...state,
-                    won: true
-                })
+                if (state.P1HP <= 0) {
+                    P2.wins++
+                    P1.losses++
+
+                    return (state = {
+                        ...state,
+                        P1: P1,
+                        P2: P2,
+                        won: true
+                    })
+                } else {
+                    P1.wins++
+                    P2.losses++
+
+                    return (state = {
+                        ...state,
+                        P1: P1,
+                        P2: P2,
+                        won: true
+                    })
+                }
             } else {
                 return state
             }

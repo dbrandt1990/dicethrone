@@ -1,7 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 class HomePage extends React.Component {
+
 
     render() {
         return (
@@ -14,8 +15,6 @@ class HomePage extends React.Component {
         )
     }
 }
-
-
 
 
 export default HomePage
