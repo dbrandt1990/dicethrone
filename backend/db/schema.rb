@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_30_015114) do
-
-  create_table "games", force: :cascade do |t|
-    t.string "P1_username"
-    t.string "P2_username"
-    t.integer "P1_id"
-    t.integer "P2_id"
-    t.boolean "won"
-  end
+ActiveRecord::Schema.define(version: 2021_08_30_002334) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"

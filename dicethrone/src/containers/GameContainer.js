@@ -11,12 +11,17 @@ class GameContainer extends React.Component {
     gameWon = () => {
         return <Redirect to='/winner' />
     }
-
+    handleExit = () => {
+        this.props.resetState()
+        return <Redirect to='/' />
+    }
     render() {
+        { if (!this.props.loggedIn) { return <Redirect to='/' /> } }
         return (
             <div id="gameContainer" >
                 <DiceContainer />
                 <PlayersContainer />
+                <button onClick={this.handleExit}>Exit</button>
             </div>
         )
     }
@@ -24,8 +29,15 @@ class GameContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        won: state.manageGame.won
+        won: state.manageGame.won,
+        loggedIn: state.manageGame.loggedIn
     }
 }
 
-export default connect(mapStateToProps)(GameContainer)
+const mapDispatchToProps = dispatch => {
+    return {
+        resetState: () => dispatch({ type: 'RESET_STATE' })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameContainer)

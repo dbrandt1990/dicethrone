@@ -15,7 +15,7 @@ class Login extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    fetchUsers = (user1, user2) => {
+    async fetchUsers(user1, user2) {
         return fetch("http://localhost:3000/api/user", {
             headers: {
                 'Accept': 'application/json',
@@ -26,6 +26,9 @@ class Login extends React.Component {
             .then(users => {
                 console.log('fetched users', users.users)
                 return this.props.confirmUsers(user1, user2, users.users)
+            }).catch(err => {
+                alert('there was an issue loading the data base, Please go back and try again')
+                console.log(err)
             })
     }
 
@@ -33,9 +36,11 @@ class Login extends React.Component {
         e.preventDefault()
         let P1 = this.state.username1
         let P2 = this.state.username2
-        let fetched = this.fetchUsers(P1, P2)
+        this.fetchUsers(P1, P2)
 
-        console.log('fetch in varible', fetched)
+        // setTimeout(() => {
+        // }, 3000);
+
 
         if (this.state.username1 !== '' && this.state.username2 !== '')
             this.setState({

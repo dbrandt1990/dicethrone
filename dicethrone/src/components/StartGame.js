@@ -2,37 +2,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 
-class StartGame extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            start: false
-        }
-    }
+const StartGame = (props) => {
 
-    handleStart = () => {
-        this.setState({
-            start: true
-        })
-    }
-
-    confirmedUsers = () => {
-        console.log('User1', this.props.user1, 'User2', this.props.user2)
-        if (this.state.start && typeof this.props.user1 === 'object' && typeof this.props.user2 === 'object') {
+    const confirmedUsers = () => {
+        console.log('User1', props.user1, 'User2', props.user2)
+        if (typeof props.user1 === 'object' && typeof props.user2 === 'object') {
             return <Redirect to='/game' />
         }
     }
 
-    render() {
-
-        return (
-            <div id='start_game' >
-                {this.confirmedUsers()}
-                <h3>Starting Game!</h3>
-                <button type='button' onClick={this.handleStart} >Start!</button>
-            </div>
-        )
-    }
+    return (
+        <div id='start_game' >
+            {confirmedUsers()}
+            <h3>Finding Users..</h3>
+            <h3 className='player' id='P1'>P1: {props.user1.username !== 'undefined' ? props.user1.username : "Player 1"}</h3>
+            <h3 className='player' id='P2'>P2: {props.user2.username !== 'undefined' ? props.user1.username : "Player 2"}</h3>
+        </div>
+    )
 }
 
 const mapStateToProps = state => {

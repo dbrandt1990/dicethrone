@@ -1,5 +1,5 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
-const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false }
+const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false }
 const initialUser = { username: '' }//may need to add games array and wins/rank here
 
 export const manageDice = (state = initialDice, action) => {
@@ -53,10 +53,12 @@ export const manageGame = (state = initialGame, action) => {
             let P2_confirmed = users.filter(user => {
                 return user.username === P2
             })
+
             return state = {
                 ...state,
                 P1: P1_confirmed[0],
-                P2: P2_confirmed[0]
+                P2: P2_confirmed[0],
+                loggedIn: true
             }
         }
         case 'RESOLVE_DICE': {
@@ -154,6 +156,11 @@ export const manageGame = (state = initialGame, action) => {
                     won: true
                 })
             }
+        }
+        case 'RESET_STATE': {
+            console.log('before', state)
+            state = initialGame
+            console.log('after', state)
         }
         default:
             return state
