@@ -3,42 +3,47 @@ import { connect } from 'react-redux';
 
 const Ranks = (props) => {
 
+    const renderUsers = () => {
 
-    const getRanks = () => {
-
-        fetch("http://localhost:3000/api/user", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
+        return props.allUsers.map(u => {
+            console.log('in for each loop of users', u.username)
+            //! gettig data correctly, not rendering to page though.
+            return (
+                <tr key={u.id}>
+                    <td key={u.id + 'a'}>{u.username}</td>
+                    <td key={u.id + 'b'}>{u.rank}</td>
+                    <td key={u.id + 'c'}>{u.wins}</td>
+                    <td key={u.id + 'd'}>{u.losses}</td>
+                </tr>
+            )
         })
-            .then(response => response.json())
-            .then(users => {
-                let sorted = users.users.filter(u => u.rank).sort((a, b) => a.rank - b.rank)
-                console.log(sorted)
-                return props.ranks(sorted)
-            }).catch(err => { console.log(err.full_messages) })
     }
+
 
     return (
         <div id='leaderBoard'>
             <h3>Leader Board</h3>
-            {getRanks()}
-            {console.log(props.ranks)}
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Rank</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderUsers()}
+                </tbody>
+            </table>
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        ranks: state.manageRanks.ranks
+        allUsers: state.manageUsers.allUsers
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        ranks: (sortedUsers) => dispatch({ type: 'GET_RANKS', sortedUsers })
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Ranks)
+export default connect(mapStateToProps)(Ranks)

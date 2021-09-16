@@ -11,32 +11,28 @@ class Login extends React.Component {
         }
     }
 
+    // async componentDidMount() {
+    //     try {
+    //         const response = await fetch("http://localhost:3000/api/user")
+    //         const json = await response.json()
+    //         this.props.setUsers(json.users)
+    //         console.log('Users added to reducer state')
+    //         console.log('users sorted by rank?', this.props.allUsers)
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    // }
+
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
-    }
-    // ! think about moving this to the homepage, gabbing users and putting them in the state, and just confirming them here to help with server issuses
-    async fetchUsers(user1, user2) {
-        return fetch("http://localhost:3000/api/user", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(response => response.json())
-            .then(users => {
-                console.log('fetched users', users.users)
-                return this.props.confirmUsers(user1, user2, users.users)
-            }).catch(err => {
-                alert('there was an issue loading the data base, Please go back and try again')
-                console.log(err)
-            })
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
         let P1 = this.state.username1
         let P2 = this.state.username2
-        this.fetchUsers(P1, P2)
+        let allUsersArr = this.props.allUsers
+        this.props.confirmUsers(P1, P2, allUsersArr)
 
         if (this.state.username1 !== '' && this.state.username2 !== '')
             this.setState({
@@ -67,11 +63,18 @@ class Login extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        allUsers: state.manageUsers.allUsers
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
+        setUsers: (userArr) => dispatch({ type: 'GET_USERS', userArr }),
         confirmUsers: (P1, P2, allUsersArr) => dispatch({ type: 'CONFIRM_USERS', P1, P2, allUsersArr }),
         createGame: (P1, P2) => dispatch({ type: 'CREATE_GAME', P1, P2 })
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

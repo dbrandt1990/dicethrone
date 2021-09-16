@@ -16,16 +16,6 @@ class Api::UserController < ApplicationController
         end
     end
 
-    def calculateRank
-        let ratios = {}
-        User.all.each do |user|
-           let ratio = user.wins/user.losses
-           ratios[user.id] = ratio
-        end
-        # find a way to sort the obj 
-        # maybe use existing ranks and check ones that are close
-    end
-
     private 
 
     def user_params

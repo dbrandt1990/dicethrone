@@ -4,20 +4,23 @@ import { Redirect } from 'react-router'
 
 const StartGame = (props) => {
 
-    const confirmedUsers = () => {
-        console.log('User1', props.user1, 'User2', props.user2)
+    const renderPlayers = () => {
 
-        if (typeof props.user1 === 'object' && typeof props.user2 === 'object') {
+        if (props.user1 && props.user2) {
             return <Redirect to='/game' />
+        } else {
+            return (
+                <div>
+                    <p>Sorry there was a problem validating those users. Please go back and try again.</p>
+                </div>
+            )
         }
     }
 
     return (
         <div id='start_game' >
-            {confirmedUsers()}
-            <h3>Finding Users..</h3>
-            <h3 className='player' id='P1'>P1: {props.user1.username !== 'undefined' ? props.user1.username : "Player 1"}</h3>
-            <h3 className='player' id='P2'>P2: {props.user2.username !== 'undefined' ? props.user1.username : "Player 2"}</h3>
+            <h3>Oopps..</h3>
+            {renderPlayers()}
         </div>
     )
 }

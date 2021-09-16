@@ -1,7 +1,6 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
 const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false }
-const initialUser = { username: '' }
-const initialLeaderBoard = { ranks: [] }
+const initialUser = { username: '', allUsers: null }
 
 export const manageDice = (state = initialDice, action) => {
     switch (action.type) {
@@ -210,22 +209,18 @@ export const manageUsers = (state = initialUser, action) => {
                 }).catch(err => console.log(err.full_messages))
             break
         }
-        default:
-            return state
-    }
-}
-
-export const manageRanks = (state = initialLeaderBoard, action) => {
-    switch (action.type) {
-        case 'GET_RANKS': {
+        case 'GET_USERS': {
+            //sort, and update ranks, when game is done patch in db
+            let sorted = action.userArr.sort((a, b) => (b.wins - b.losses) - (a.wins - a.losses))
+            sorted.forEach((u, i) => u.rank = i + 1)
             return state = {
-                ranks: action.sortedUsers
+                ...state,
+                allUsers: sorted
             }
         }
 
         default:
             return state
-
     }
 }
 
