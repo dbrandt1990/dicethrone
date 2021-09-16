@@ -1,13 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+
 
 const Ranks = (props) => {
 
-    const renderUsers = () => {
+    const history = useHistory()
 
+    const renderUsers = () => {
         return props.allUsers.map(u => {
-            console.log('in for each loop of users', u.username)
-            //! gettig data correctly, not rendering to page though.
             return (
                 <tr key={u.id}>
                     <td key={u.id + 'a'}>{u.username}</td>
@@ -19,10 +20,10 @@ const Ranks = (props) => {
         })
     }
 
-
     return (
         <div id='leaderBoard'>
             <h3>Leader Board</h3>
+            <button onClick={() => history.push('/')}>back</button>
             <table>
                 <thead>
                     <tr>

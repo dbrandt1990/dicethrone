@@ -3,12 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 class HomePage extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            fetchedUsers: false
-        }
-    }
+
     async fetchUsers() {
         try {
             const response = await fetch("http://localhost:3000/api/user")

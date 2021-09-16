@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 class Login extends React.Component {
     constructor(props) {
@@ -10,18 +10,6 @@ class Login extends React.Component {
             ready: false
         }
     }
-
-    // async componentDidMount() {
-    //     try {
-    //         const response = await fetch("http://localhost:3000/api/user")
-    //         const json = await response.json()
-    //         this.props.setUsers(json.users)
-    //         console.log('Users added to reducer state')
-    //         console.log('users sorted by rank?', this.props.allUsers)
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
