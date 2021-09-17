@@ -11,6 +11,10 @@ class Login extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.props.resetState()
+    }
+
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
@@ -53,7 +57,8 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        allUsers: state.manageUsers.allUsers
+        allUsers: state.manageUsers.allUsers,
+        gameState: state.manageGame
     }
 }
 
@@ -61,7 +66,8 @@ const mapDispatchToProps = dispatch => {
     return {
         setUsers: (userArr) => dispatch({ type: 'GET_USERS', userArr }),
         confirmUsers: (P1, P2, allUsersArr) => dispatch({ type: 'CONFIRM_USERS', P1, P2, allUsersArr }),
-        createGame: (P1, P2) => dispatch({ type: 'CREATE_GAME', P1, P2 })
+        createGame: (P1, P2) => dispatch({ type: 'CREATE_GAME', P1, P2 }),
+        resetState: () => dispatch({ type: 'RESET_STATE' })
     }
 }
 

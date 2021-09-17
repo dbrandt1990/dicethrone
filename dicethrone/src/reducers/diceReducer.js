@@ -71,7 +71,6 @@ export const manageGame = (state = initialGame, action) => {
             let b = 0 //4-5
             let count = 0 //smStraight count
 
-
             console.log('RESOLV_DICE called', results)
 
             if (smStraightSetCheck[3]) {
@@ -95,7 +94,7 @@ export const manageGame = (state = initialGame, action) => {
                 console.log('lg straight = 7dmg + 2hp')
                 opponentHP = opponentHP - 7
                 attackerHP = attackerHP + 2
-            } else if (count < 4) {
+            } else if (count < 3) {
                 action.results.forEach((num) => {
                     if (num === 1 || num === 2 || num === 3) {
                         a++
@@ -178,6 +177,12 @@ export const manageGame = (state = initialGame, action) => {
                 return state
             }
         }
+        case 'LOG_OUT': {
+            return state = {
+                ...state,
+                loggedIn: false
+            }
+        }
         case 'RESET_STATE': {
             return state = initialGame
         }
@@ -217,7 +222,25 @@ export const manageUsers = (state = initialUser, action) => {
                 allUsers: sorted
             }
         }
-
+        case 'UPDATE_USERS': {
+            let updatedArr = []
+            let p1 = action.p1
+            let p2 = action.p2
+            state.allUsers.forEach((u) => {
+                if (u.id !== p1.id && u.id !== p2.id) {
+                    updatedArr.push(u)
+                }
+            })
+            updatedArr.push(p1)
+            updatedArr.push(p2)
+            let sorted = updatedArr.sort((a, b) => (b.wins - b.losses) - (a.wins - a.losses))
+            sorted.forEach((u, i) => u.rank = i + 1)
+            console.log('updated users in reducer', updatedArr)
+            return state = {
+                ...state,
+                allUsers: sorted
+            }
+        }
         default:
             return state
     }

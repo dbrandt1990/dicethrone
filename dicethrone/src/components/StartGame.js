@@ -4,6 +4,7 @@ import { Redirect } from 'react-router'
 
 const StartGame = (props) => {
 
+
     const renderPlayers = () => {
 
         if (props.user1 && props.user2) {

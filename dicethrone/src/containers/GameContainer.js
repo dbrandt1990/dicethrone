@@ -8,17 +8,46 @@ import { Redirect } from 'react-router'
 
 class GameContainer extends React.Component {
 
-    updateUsers = () => {
-        // patch request to update users wins and losses if game won
+
+    componentWillUnmount() {
+        console.log('unmounting and updating')
+        this.updateAfterWin()
     }
+
+    updateUser = (player) => {
+        // patch request to update users wins and losses if game won
+        fetch(`http://localhost:3000/api/user/${player.id}`, {
+            method: 'PATCH',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                '_method': 'PATCH',
+                'Authorization': ''
+            },
+            body: JSON.stringify(player)
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log("results from patch", res);
+            })
+            .catch(err => console.error(err.full_messages))
+    }
+
     handleExit = (e) => {
         e.preventDefault()
-        if (this.props.won) {
-            this.updateUsers()
-        }
-        this.props.resetState()
-        return <Redirect to='/' />
+        this.props.logOut()
     }
+
+    updateAfterWin = async () => {
+        await this.updateUser(this.props.P1)
+
+        setTimeout(() => {
+            this.updateUser(this.props.P2)
+            this.props.updateUsersInState(this.props.P1, this.props.P2)
+            console.log('update in the timer')
+        }, 2000);
+    }
+
     render() {
         { if (!this.props.loggedIn) { return <Redirect to='/' /> } }
         return (
@@ -34,13 +63,17 @@ class GameContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         won: state.manageGame.won,
-        loggedIn: state.manageGame.loggedIn
+        loggedIn: state.manageGame.loggedIn,
+        P1: state.manageGame.P1,
+        P2: state.manageGame.P2,
+        allUsers: state.manageUsers.allUsers
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        resetState: () => dispatch({ type: 'RESET_STATE' })
+        logOut: () => dispatch({ type: 'LOG_OUT' }),
+        updateUsersInState: (p1, p2) => dispatch({ type: 'UPDATE_USERS', p1, p2 })
     }
 }
 

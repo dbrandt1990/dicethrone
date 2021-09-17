@@ -7,8 +7,8 @@ class Api::UserController < ApplicationController
     end
 
     def create 
-        user = User.new(user_params)
-        # byebug
+        user = User.new({username: params[:username]})
+        
         if user.save 
             render json: {status: :created, user: user}
         else
@@ -16,9 +16,14 @@ class Api::UserController < ApplicationController
         end
     end
 
-    private 
-
-    def user_params
-        params.require(:user).permit(:username)
+    def update 
+        user = User.find(params[:id])
+        if user.wins != params[:wins]
+            user.update({wins: params[:wins]})
+        
+        elsif user.losses != params[:losses]
+            user.update({losses: params[:losses]})
+        end
     end
+
 end

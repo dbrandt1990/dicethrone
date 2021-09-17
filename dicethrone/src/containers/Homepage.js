@@ -4,13 +4,25 @@ import { connect } from 'react-redux';
 
 class HomePage extends React.Component {
 
+    componentDidMount() {
+        this.fetchUsers();
+        this.timer = setInterval(() => {
+            this.fetchUsers()
+            console.log('Users added at mount', this.props.allUsers)
+        }, 5000);
+    }
+
+    clearTimer = () => {
+        clearInterval(this.timer)
+        this.timer = null
+    }
+
     async fetchUsers() {
         try {
             const response = await fetch("http://localhost:3000/api/user")
             const json = await response.json()
             this.props.setUsers(json.users)
-            console.log('Users added to reducer state')
-
+            console.log('GET_USERS called from hompage')
         } catch (err) {
             console.log(err)
         }
@@ -28,19 +40,6 @@ class HomePage extends React.Component {
                 </div>
             )
         }
-    }
-
-    componentDidMount() {
-        this.fetchUsers();
-        this.timer = setInterval(() => {
-            this.fetchUsers()
-            console.log('Users added at mount', this.props.allUsers)
-        }, 5000);
-    }
-
-    clearTimer = () => {
-        clearInterval(this.timer)
-        this.timer = null
     }
 
     render() {
