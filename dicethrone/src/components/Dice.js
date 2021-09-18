@@ -15,20 +15,20 @@ export const Dice = (props) => {
 
     return (
         <div id='dice'>
-            <div onClick={props.handleClick} className={`${player}`} id='die1'>{props.results[0]}
-                <span className={setSymbol(props.results[0])}></span>
+            <div onClick={props.handleClick} className={`${player}`} id='die1'>
+                <span className={setSymbol(props.results[0])}>{props.results[0]}</span>
             </div>
-            <div onClick={props.handleClick} className={`${player}`} id='die2'>{props.results[1]}
-                <span className={setSymbol(props.results[1])}></span>
+            <div onClick={props.handleClick} className={`${player}`} id='die2'>
+                <span className={setSymbol(props.results[1])}>{props.results[1]}</span>
             </div>
-            <div onClick={props.handleClick} className={`${player}`} id='die3'>{props.results[2]}
-                <span className={setSymbol(props.results[2])}></span>
+            <div onClick={props.handleClick} className={`${player}`} id='die3'>
+                <span className={setSymbol(props.results[2])}>{props.results[2]}</span>
             </div>
-            <div onClick={props.handleClick} className={`${player}`} id='die4'>{props.results[3]}
-                <span className={setSymbol(props.results[3])}></span>
+            <div onClick={props.handleClick} className={`${player}`} id='die4'>
+                <span className={setSymbol(props.results[3])}>{props.results[3]}</span>
             </div>
-            <div onClick={props.handleClick} className={`${player}`} id='die5'>{props.results[4]}
-                <span className={setSymbol(props.results[4])}></span>
+            <div onClick={props.handleClick} className={`${player}`} id='die5'>
+                <span className={setSymbol(props.results[4])}>{props.results[4]}</span>
             </div>
         </div>
     )
