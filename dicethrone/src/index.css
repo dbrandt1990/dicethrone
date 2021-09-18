@@ -12,6 +12,32 @@ code {
     monospace;
 }
 
+.App {
+  margin-top: 15%;
+}
+
+h3 {
+  margin-left: 75px;;
+}
+
+#root, #homepage, #signup, #leaderboard, #login {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+input {
+  margin: 10px;
+  border-radius: 4px;
+}
+
+.btn {
+  width: 50%;
+  margin: 10px;
+  margin-left: 30px;
+}
+
+
 span {
   display: inline;
   color: #FFFF9e;
@@ -21,32 +47,36 @@ span {
 }
 
 .dieP1 {
+  border: solid 3px #5bc0de;
   display: inline-block;
-  margin: auto;
   margin: 10px;
   padding: 10px;
-  background-color: #4ABDAC;
-  width: 50px;
-  height: 50px;
+  background-color: #5bc0de;
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
 }
 
 .dieP2 {
+  border: solid 3px #d9534f;
   display: inline-block;
   margin: 10px;
   padding: 10px;
-  background-color: #FC4A1A;
-  width: 50px;
-  height: 50px;
+  background-color: #d9534f;
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
 }
 
 .die-clicked {
   border: solid 3px #f1f1d2;
   display: inline-block;
-  margin: 7px;
+  margin: 10px;
   padding: 10px;
   background-color: #f5b9a8;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
 }
 
 .dieP1:active {
@@ -58,15 +88,15 @@ span {
 }
 
 .finishHighlight {
-  border: solid 3px #4ABDAC;
+  border: solid 3px #5bc0de;
 }
 
 .player#P1 {
-  color: #4ABDAC;
+  color: #5bc0de;
 }
 
 .player#P2 {
-  color: #FC4A1A;
+  color: #d9534f;
 }
 
 table {

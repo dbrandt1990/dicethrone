@@ -45,10 +45,10 @@ class Login extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <h3>Login</h3>
                     <label>Player 1: </label>
-                    <input onChange={this.handleChange} type='text' name='username1' placeholder='username' />
+                    <input onChange={this.handleChange} type='text' name='username1' placeholder='username' /><br />
                     <label>Player 2: </label>
-                    <input onChange={this.handleChange} type='text' name='username2' placeholder='username' />
-                    <button type='submit'>Start Game</button>
+                    <input onChange={this.handleChange} type='text' name='username2' placeholder='username' /><br />
+                    <button className='btn btn-warning' type='submit'>Start Game</button>
                 </form>
             </div>
         )

@@ -8,7 +8,6 @@ class PlayersContainer extends React.Component {
     render() {
         return (
             <div id='playerscontainer'>
-                <h1>{this.props.status}</h1>
                 <Player id='P1cont' won={this.props.won} player="P1" name={this.props.P1_name} hp={this.props.P1HP} />
                 <Player id='P2cont' won={this.props.won} player="P2" name={this.props.P2_name} hp={this.props.P2HP} />
             </div>

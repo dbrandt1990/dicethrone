@@ -32,8 +32,9 @@ class Signup extends React.Component {
             <div id='signup' >
                 <form onSubmit={this.handleSubmit}>
                     <h3>Sign Up</h3>
-                    <input onChange={this.handleChange} type='text' name='username' placeholder='username' />
-                    <button type='submit'>Create User</button>
+                    <label>Name: </label>
+                    <input onChange={this.handleChange} type='text' name='username' placeholder='username' /><br />
+                    <button className='btn btn-danger' type='submit'>Create User</button>
                 </form>
             </div>
         )

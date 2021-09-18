@@ -211,7 +211,7 @@ export const manageUsers = (state = initialUser, action) => {
                     console.log('db data', user)
                     return user
                 }).catch(err => console.log(err.full_messages))
-            break
+            return state
         }
         case 'GET_USERS': {
             //sort, and update ranks, when game is done patch in db

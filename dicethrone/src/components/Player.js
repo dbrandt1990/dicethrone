@@ -9,7 +9,7 @@ export const Player = (props) => {
     }
     return (
         <div className='player' id={player}>
-            <h3>{name}</h3>
+            <h2>{name}</h2>
             <p id={name.concat('HP')}>HP: {props.hp}</p>
         </div>
     )

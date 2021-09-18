@@ -34,9 +34,9 @@ class HomePage extends React.Component {
             this.clearTimer()
             return (
                 <div id='homepage-links'>
-                    <NavLink to='/signup'>Sign Up</NavLink>
-                    <NavLink to='/login'>Start Game</NavLink>
-                    <NavLink to='/ranks'>Leader Board</NavLink>
+                    <NavLink className='btn btn-info' to='/signup'>Sign Up</NavLink>
+                    <NavLink className='btn btn-info' to='/login'>Start Game</NavLink>
+                    <NavLink className='btn btn-info' to='/ranks'>Leader Board</NavLink>
                 </div>
             )
         }
@@ -47,7 +47,7 @@ class HomePage extends React.Component {
 
             <div id='homepage'>
                 {this.clearTimer()}
-                <h1>WELCOME TO DICETHRONE-lite</h1>
+                <h1>WELCOME TO DICETHRONE</h1>
                 {this.rednerLinks()}
             </div>
         )
