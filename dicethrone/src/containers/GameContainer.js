@@ -1,5 +1,6 @@
 import DiceContainer from "./DiceContainer";
-import PlayersContainer from "./PlayersContainer";
+import Player1Container from "./Player1Container";
+import Player2Container from "./Player2Container";
 import React from "react";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router'
@@ -53,7 +54,8 @@ class GameContainer extends React.Component {
         return (
             <div id="gameContainer" >
                 <DiceContainer />
-                <PlayersContainer />
+                <Player1Container />
+                <Player2Container />
                 <button id='exitGame' onClick={this.handleExit}>Exit</button>
             </div>
         )
