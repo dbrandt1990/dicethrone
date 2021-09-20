@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #292b2c;
+
 }
 
 code {
@@ -12,29 +14,96 @@ code {
     monospace;
 }
 
+:root {
+  --p1Color: #5bc0de;
+  --p2Color: #d9534f;
+}
+
 .App {
-  margin-top: 15%;
+  margin-top: 10%;
+}
+
+#rollResults, #effectText {
+  width: 30%;
+  padding: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#rollText{
+  margin-left: 45%;
+}
+
+#dice {
+  position: relative;
+  margin-left: 35%;
+}
+
+
+#roll.btn {
+  position: absolute;
+  margin-left: 33%;
+}
+
+#finishTurn{
+  position: absolute;
+  margin-top: 55px;
+  margin-left: 33%;
+}
+
+
+#exitGame {
+  position: fixed;
+  margin-top: 200px;
+  margin-left: 33%;
+  width: 10%;
+  padding: 10px;
+}
+
+#player1container {
+ float: left;
+ margin: 30px;
+}
+
+#player2container {
+float: right;
+margin: 30px;
+
 }
 
 h3 {
   margin-left: 75px;;
 }
 
+#welcome {
+  margin-left: 33%;
+}
+
 #root, #homepage, #signup, #leaderboard, #login {
+  display: inline;
+  color:white;
   margin: auto;
-  width: 50%;
   padding: 10px;
+}
+
+#loginInputs, #signupInputs {
+  margin-left: 40%;
 }
 
 input {
   margin: 10px;
   border-radius: 4px;
 }
+input, select, textarea {
+  color: #292b2c;
+}
 
 .btn {
-  width: 50%;
+  width: 10%;
   margin: 10px;
-  margin-left: 30px;
+  margin-left: 43%;
 }
 
 
@@ -45,22 +114,22 @@ span {
 }
 
 .dieP1 {
-  border: solid 3px #5bc0de;
+  border: solid 3px var(--p1Color);
   display: inline-block;
   margin: 10px;
   padding: 10px;
-  background-color: #5bc0de;
+  background-color: var(--p1Color);
   width: 60px;
   height: 60px;
   border-radius: 10%;
 }
 
 .dieP2 {
-  border: solid 3px #d9534f;
+  border: solid 3px var(--p2Color);
   display: inline-block;
   margin: 10px;
   padding: 10px;
-  background-color: #d9534f;
+  background-color: var(--p2Color);
   width: 60px;
   height: 60px;
   border-radius: 10%;
@@ -82,19 +151,15 @@ span {
 }
 
 .dieP2:active {
-  background-color: #f1f1d2;
-}
-
-.finishHighlight {
-  border: solid 3px #5bc0de;
+  background-color: #f1f1d2 ;
 }
 
 .player#P1 {
-  color: #5bc0de;
+  color: var(--p1Color);
 }
 
 .player#P2 {
-  color: #d9534f;
+  color: var(--p2Color);
 }
 
 table {
@@ -105,10 +170,11 @@ table {
 
 td, th {
   border: 1px solid #dddddd;
+  color: white;
   text-align: left;
   padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color:grey;
 }

@@ -1,5 +1,5 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
-const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false }
+const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false, rollText: { type: "", effect: "" } }
 const initialUser = { username: '', allUsers: null }
 
 export const manageDice = (state = initialDice, action) => {
@@ -22,7 +22,7 @@ export const manageDice = (state = initialDice, action) => {
             //check if actuallly rolled to prevent accidental roll clicks
             if (JSON.stringify(state.results) !== JSON.stringify(newResults)) {
                 if (rollAttempts === 3) {
-                    document.querySelector('#finishTurn').className = 'finishHighlight'
+                    document.querySelector('#finishTurn').className = 'btn btn-success'
                 }
                 rollAttempts++
             }
@@ -64,6 +64,8 @@ export const manageGame = (state = initialGame, action) => {
         case 'RESOLVE_DICE': {
             let opponentHP = state.turn === 'P1' ? state.P2HP : state.P1HP
             let attackerHP = state.turn === 'P1' ? state.P1HP : state.P2HP
+            let resultType = ''
+            let effect = ''
             let results = JSON.stringify(action.results.sort())
             let set = new Set(action.results)
             let smStraightSetCheck = Array.from(set)
@@ -72,7 +74,7 @@ export const manageGame = (state = initialGame, action) => {
             let count = 0 //smStraight count
 
             console.log('RESOLV_DICE called', results)
-
+            // ! update the hitText in state with the effects of the roll
             if (smStraightSetCheck[3]) {
                 smStraightSetCheck.forEach((num, i) => {
                     if (num + 1 === smStraightSetCheck[i + 1]) {
@@ -82,6 +84,8 @@ export const manageGame = (state = initialGame, action) => {
 
                 if (count === 3) {
                     console.log('small straight = 5dmg + 1hp')
+                    resultType = 'Small Straight!'
+                    effect = '5 dmg + 1 hp'
                     opponentHP = opponentHP - 5
                     attackerHP = attackerHP + 1
                 }
@@ -89,9 +93,13 @@ export const manageGame = (state = initialGame, action) => {
 
             if (results === JSON.stringify([6, 6, 6, 6, 6])) {
                 console.log('6 X5 = 18dmg')
+                resultType = 'ULTIMATE SMASH!'
+                effect = '18 dmg'
                 opponentHP = opponentHP - 18
             } else if (results === JSON.stringify([1, 2, 3, 4, 5]) || results === JSON.stringify([2, 3, 4, 5, 6])) {
                 console.log('lg straight = 7dmg + 2hp')
+                resultType = 'Large Straight!'
+                effect = '7 dmg + 2 hp'
                 opponentHP = opponentHP - 7
                 attackerHP = attackerHP + 2
             } else if (count < 3) {
@@ -108,10 +116,14 @@ export const manageGame = (state = initialGame, action) => {
                 if (a > 2) {
                     let damage = (a + 5) - 3
                     console.log('1-3 damage', damage)
+                    resultType = `${a} lighting bolts!`
+                    effect = `${damage} dmg`
                     opponentHP = opponentHP - damage
                 } else if (b > 2) {
                     let heal = (b + 1) - 3
                     console.log('4-5 heal', heal)
+                    resultType = `${b} hearts!`
+                    effect = `${heal} hp`
                     attackerHP = attackerHP + heal
                 }
             }
@@ -122,7 +134,8 @@ export const manageGame = (state = initialGame, action) => {
                 return (state = {
                     ...state,
                     P1HP: attackerHP,
-                    P2HP: opponentHP
+                    P2HP: opponentHP,
+                    rollText: { type: resultType, effect: effect }
                 })
             } else {
                 console.log('opp', opponentHP)
@@ -130,7 +143,8 @@ export const manageGame = (state = initialGame, action) => {
                 return (state = {
                     ...state,
                     P1HP: opponentHP,
-                    P2HP: attackerHP
+                    P2HP: attackerHP,
+                    rollText: { type: resultType, effect: effect }
                 })
             }
         }
@@ -226,20 +240,24 @@ export const manageUsers = (state = initialUser, action) => {
             let updatedArr = []
             let p1 = action.p1
             let p2 = action.p2
-            state.allUsers.forEach((u) => {
-                if (u.id !== p1.id && u.id !== p2.id) {
-                    updatedArr.push(u)
+            if (state.allUsers) {
+                state.allUsers.forEach((u) => {
+                    if (u.id !== p1.id && u.id !== p2.id) {
+                        updatedArr.push(u)
+                    }
+                })
+
+                updatedArr.push(p1)
+                updatedArr.push(p2)
+                let sorted = updatedArr.sort((a, b) => (b.wins - b.losses) - (a.wins - a.losses))
+                sorted.forEach((u, i) => u.rank = i + 1)
+                console.log('updated users in reducer', updatedArr)
+                return state = {
+                    ...state,
+                    allUsers: sorted
                 }
-            })
-            updatedArr.push(p1)
-            updatedArr.push(p2)
-            let sorted = updatedArr.sort((a, b) => (b.wins - b.losses) - (a.wins - a.losses))
-            sorted.forEach((u, i) => u.rank = i + 1)
-            console.log('updated users in reducer', updatedArr)
-            return state = {
-                ...state,
-                allUsers: sorted
             }
+            return state
         }
         default:
             return state

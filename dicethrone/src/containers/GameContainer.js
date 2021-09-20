@@ -52,11 +52,15 @@ class GameContainer extends React.Component {
     render() {
         { if (!this.props.loggedIn) { return <Redirect to='/' /> } }
         return (
-            <div id="gameContainer" >
-                <DiceContainer />
+            <div id="gamecontainer" >
+                <div id='rollText'>
+                    <h3 id='rollResults'>{this.props.rollText.type ? this.props.rollText.type : ''}</h3>
+                    <h4 id='effectText'>{this.props.rollText.effect ? this.props.rollText.effect : ''}</h4>
+                </div>
                 <Player1Container />
                 <Player2Container />
-                <button id='exitGame' onClick={this.handleExit}>Exit</button>
+                <DiceContainer />
+                <button className='btn btn-danger' id='exitGame' onClick={this.handleExit}>Exit</button>
             </div>
         )
     }
@@ -64,6 +68,7 @@ class GameContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
+        rollText: state.manageGame.rollText,
         won: state.manageGame.won,
         loggedIn: state.manageGame.loggedIn,
         P1: state.manageGame.P1,

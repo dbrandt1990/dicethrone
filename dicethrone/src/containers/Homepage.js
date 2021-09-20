@@ -47,7 +47,7 @@ class HomePage extends React.Component {
 
             <div id='homepage'>
                 {this.clearTimer()}
-                <h1>WELCOME TO DICETHRONE</h1>
+                <h1 id='welcome'>WELCOME TO DICETHRONE</h1>
                 {this.rednerLinks()}
             </div>
         )

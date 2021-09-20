@@ -33,6 +33,8 @@ class DiceContainer extends React.Component {
                 this.props.rollDice(this.props.clicked)
             }
         }
+        document.querySelector('#roll').className = 'btn btn-warning'
+
         document.querySelectorAll('.die-clicked').forEach(e => { e.className = `die${this.props.currentPlayer}` })
 
     }
@@ -40,7 +42,7 @@ class DiceContainer extends React.Component {
     finishTurn = (e) => {
         e.preventDefault()
         if (!this.props.won && this.props.rolls > 1) {
-            document.querySelector('#finishTurn').className = 'finish'
+            document.querySelector('#finishTurn').className = 'btn btn-warning'
 
             this.props.resolveDice(this.props.results)
 
@@ -50,14 +52,15 @@ class DiceContainer extends React.Component {
 
             this.props.endGame()
         }
+        document.querySelector('#roll').className = 'btn btn-success'
     }
 
     render() {
         return (
             <div id='dicecontainer'>
                 <Dice currentPlayer={this.props.currentPlayer} handleClick={this.handleClick} results={this.props.results} />
-                <button id='roll' onClick={this.handleRoll}>Roll</button>
-                <button id='finishTurn' onClick={this.finishTurn}>Finish</button>
+                <button className='btn btn-success' id='roll' onClick={this.handleRoll}>Roll</button>
+                <button className='btn btn-warning' id='finishTurn' onClick={this.finishTurn}>Finish</button>
             </div>
         )
     }
