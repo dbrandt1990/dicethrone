@@ -25,16 +25,23 @@ code {
 
 #rollResults, #effectText {
   width: 30%;
-  padding: 10px;
-  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
-#rollText{
-  margin-left: 45%;
+@-webkit-keyframes fadeOut {
+  from {opacity: 1; }
+  to {opacity: 0;}
 }
+
+#rollText{
+  margin-left: 47%;
+  opacity: 1;
+  visibility: hidden;
+  -webkit-animation: fadeout 3s;
+}
+
 
 #dice {
   position: relative;
@@ -77,11 +84,15 @@ h3 {
   margin-left: 75px;;
 }
 
+h4{
+  margin-left: 100px;
+}
+
 #welcome {
   margin-left: 33%;
 }
 
-#root, #homepage, #signup, #leaderboard, #login {
+#root, #homepage, #signup, #login {
   display: inline;
   color:white;
   margin: auto;
@@ -162,10 +173,21 @@ span {
   color: var(--p2Color);
 }
 
+#leaderBoard {
+ color:white;
+ transform: translate(0,-100px);
+}
+
+#ranksLabel {
+  margin-left: 38%;
+  margin-bottom: 25px;
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
+  margin-left: 23%;
 }
 
 td, th {

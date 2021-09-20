@@ -53,11 +53,16 @@ class DiceContainer extends React.Component {
             this.props.endGame()
         }
         document.querySelector('#roll').className = 'btn btn-success'
+        document.querySelector('#rollText').style.visibility = 'visible'
     }
 
     render() {
         return (
             <div id='dicecontainer'>
+                <div id='rollText'>
+                    <h3 id='rollResults'>{this.props.rollText.type ? this.props.rollText.type : 'you dont see this'}</h3>
+                    <h4 id='effectText'>{this.props.rollText.effect ? this.props.rollText.effect : 'or this'}</h4>
+                </div>
                 <Dice currentPlayer={this.props.currentPlayer} handleClick={this.handleClick} results={this.props.results} />
                 <button className='btn btn-success' id='roll' onClick={this.handleRoll}>Roll</button>
                 <button className='btn btn-warning' id='finishTurn' onClick={this.finishTurn}>Finish</button>
@@ -68,6 +73,7 @@ class DiceContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
+        rollText: state.manageGame.rollText,
         rolls: state.manageDice.rolls,
         results: state.manageDice.results,
         clicked: state.manageDice.clicked,

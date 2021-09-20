@@ -22,7 +22,7 @@ const Ranks = (props) => {
 
     return (
         <div id='leaderBoard'>
-            <h1>Leader Board</h1>
+            <h1 id='ranksLabel'>Leader Board</h1>
             {/* <button className='btn btn-warning' onClick={() => history.push('/')}>Back</button> */}
             <table>
                 <thead>

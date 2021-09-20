@@ -174,7 +174,8 @@ export const manageGame = (state = initialGame, action) => {
                         ...state,
                         P1: P1,
                         P2: P2,
-                        won: true
+                        won: true,
+                        rollText: { type: P2.username, effect: "Wins!" }
                     })
                 } else {
                     P1.wins++
@@ -184,7 +185,8 @@ export const manageGame = (state = initialGame, action) => {
                         ...state,
                         P1: P1,
                         P2: P2,
-                        won: true
+                        won: true,
+                        rollText: { type: P1.username, effect: "Wins!" }
                     })
                 }
             } else {
