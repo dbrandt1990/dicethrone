@@ -56,7 +56,7 @@ class GameContainer extends React.Component {
                 <Player1Container />
                 <Player2Container />
                 <DiceContainer />
-                <button className='btn btn-danger' id='exitGame' onClick={this.handleExit}>Exit</button>
+                <button className={this.props.won ? 'btn btn-success' : 'btn btn-danger'} id='exitGame' onClick={this.handleExit}>Exit</button>
             </div>
         )
     }

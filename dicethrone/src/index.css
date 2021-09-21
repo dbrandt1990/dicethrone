@@ -24,22 +24,26 @@ code {
 }
 
 #rollResults, #effectText {
-  width: 30%;
+  /* width: 30%;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%; */
 }
 
-@-webkit-keyframes fadeOut {
+@keyframes fadeout {
   from {opacity: 1; }
   to {opacity: 0;}
 }
 
+/* TODO: change colors of buttons to indicate a need to click, and position rollText in upper center*/
+
+.fadeout {
+  animation: fadeout 4s;
+}
+
 #rollText{
-  margin-left: 47%;
-  opacity: 1;
+  margin-right: 33%;
   visibility: hidden;
-  -webkit-animation: fadeout 3s;
+  opacity: 0;
 }
 
 

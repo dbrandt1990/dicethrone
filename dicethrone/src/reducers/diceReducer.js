@@ -1,5 +1,5 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
-const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false, rollText: { type: "", effect: "" } }
+const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false, rollText: { type: "No Effect", effect: ":(" } }
 const initialUser = { username: '', allUsers: null }
 
 export const manageDice = (state = initialDice, action) => {
@@ -74,7 +74,6 @@ export const manageGame = (state = initialGame, action) => {
             let count = 0 //smStraight count
 
             console.log('RESOLV_DICE called', results)
-            // ! update the hitText in state with the effects of the roll
             if (smStraightSetCheck[3]) {
                 smStraightSetCheck.forEach((num, i) => {
                     if (num + 1 === smStraightSetCheck[i + 1]) {
@@ -85,7 +84,7 @@ export const manageGame = (state = initialGame, action) => {
                 if (count === 3) {
                     console.log('small straight = 5dmg + 1hp')
                     resultType = 'Small Straight!'
-                    effect = '5 dmg + 1 hp'
+                    effect = '5 dmg + 1 HP'
                     opponentHP = opponentHP - 5
                     attackerHP = attackerHP + 1
                 }
@@ -99,7 +98,7 @@ export const manageGame = (state = initialGame, action) => {
             } else if (results === JSON.stringify([1, 2, 3, 4, 5]) || results === JSON.stringify([2, 3, 4, 5, 6])) {
                 console.log('lg straight = 7dmg + 2hp')
                 resultType = 'Large Straight!'
-                effect = '7 dmg + 2 hp'
+                effect = '7 dmg + 2 HP'
                 opponentHP = opponentHP - 7
                 attackerHP = attackerHP + 2
             } else if (count < 3) {
@@ -116,14 +115,14 @@ export const manageGame = (state = initialGame, action) => {
                 if (a > 2) {
                     let damage = (a + 5) - 3
                     console.log('1-3 damage', damage)
-                    resultType = `${a} lighting bolts!`
+                    resultType = `${a} Lighting Bolts!`
                     effect = `${damage} dmg`
                     opponentHP = opponentHP - damage
                 } else if (b > 2) {
                     let heal = (b + 1) - 3
                     console.log('4-5 heal', heal)
-                    resultType = `${b} hearts!`
-                    effect = `${heal} hp`
+                    resultType = `${b} Hearts!`
+                    effect = `${heal} HP`
                     attackerHP = attackerHP + heal
                 }
             }

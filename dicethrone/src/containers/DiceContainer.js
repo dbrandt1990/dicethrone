@@ -36,7 +36,6 @@ class DiceContainer extends React.Component {
         document.querySelector('#roll').className = 'btn btn-warning'
 
         document.querySelectorAll('.die-clicked').forEach(e => { e.className = `die${this.props.currentPlayer}` })
-
     }
 
     finishTurn = (e) => {
@@ -52,20 +51,39 @@ class DiceContainer extends React.Component {
 
             this.props.endGame()
         }
+
         document.querySelector('#roll').className = 'btn btn-success'
         document.querySelector('#rollText').style.visibility = 'visible'
+        document.querySelector('#rollText').className = 'fadeout'
+
+        setTimeout(() => {
+            document.querySelector('#rollText').style.visibility = 'hidden'
+            document.querySelector('#rollText').className = ''
+        }, 3000);
+    }
+
+    renderButtons = () => {
+        if(this.props.won){
+            document.querySelector('#roll').style.visibility = 'hidden'
+            document.querySelector('#finishTurn').style.visibility = 'hidden'
+        }
+        return(
+            <div id='rollButtons'>
+            <button className='btn btn-success' id='roll' onClick={this.handleRoll}>Roll</button>
+            <button className='btn btn-warning' id='finishTurn' onClick={this.finishTurn}>Finish</button>
+            </div>
+        )
     }
 
     render() {
         return (
             <div id='dicecontainer'>
                 <div id='rollText'>
-                    <h3 id='rollResults'>{this.props.rollText.type ? this.props.rollText.type : 'you dont see this'}</h3>
-                    <h4 id='effectText'>{this.props.rollText.effect ? this.props.rollText.effect : 'or this'}</h4>
+                    <h3 id='rollResults'>{this.props.rollText.type}</h3>
+                    <h4 id='effectText'>{this.props.rollText.effect}</h4>
                 </div>
                 <Dice currentPlayer={this.props.currentPlayer} handleClick={this.handleClick} results={this.props.results} />
-                <button className='btn btn-success' id='roll' onClick={this.handleRoll}>Roll</button>
-                <button className='btn btn-warning' id='finishTurn' onClick={this.finishTurn}>Finish</button>
+                {this.renderButtons()}
             </div>
         )
     }
