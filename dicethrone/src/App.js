@@ -16,7 +16,6 @@ function App() {
           <Route exact path='/login' render={() => <Login />} />
           <Route exact path='/ranks' render={() => <Ranks />} />
           <Route exact path='/game' render={() => <GameContainer />} />
-          <Route exact path='/start' render={() => <StartGame />} />
         </Switch>
       </div>
     </Router>

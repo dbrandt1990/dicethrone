@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 
 
 const Ranks = (props) => {
 
-    const history = useHistory()
+    // const history = useHistory()
 
     const renderUsers = () => {
         return props.allUsers.map(u => {
