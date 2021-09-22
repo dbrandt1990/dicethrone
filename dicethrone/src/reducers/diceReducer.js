@@ -1,5 +1,5 @@
 const initialDice = { rolls: 1, results: [0, 0, 0, 0, 0], clicked: [false, false, false, false, false] }
-const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false, rollText: { type: "No Effect", effect: ":(" } }
+const initialGame = { turn: 'P1', P1: "Player 1", P2: "Player 2", P1HP: 20, P2HP: 20, won: false, loggedIn: false, rollText: { type: "You Missed", effect: "No Effect :(" } }
 const initialUser = { username: '', allUsers: null }
 
 export const manageDice = (state = initialDice, action) => {
@@ -64,8 +64,8 @@ export const manageGame = (state = initialGame, action) => {
         case 'RESOLVE_DICE': {
             let opponentHP = state.turn === 'P1' ? state.P2HP : state.P1HP
             let attackerHP = state.turn === 'P1' ? state.P1HP : state.P2HP
-            let resultType = ''
-            let effect = ''
+            let resultType = 'You Missed'
+            let effect = 'No Effect :('
             let results = JSON.stringify(action.results.sort())
             let set = new Set(action.results)
             let smStraightSetCheck = Array.from(set)

@@ -36,6 +36,9 @@ class GameContainer extends React.Component {
 
     handleExit = (e) => {
         e.preventDefault()
+        if(this.props.won){
+            this.props.updateUsersInState(this.props.P1, this.props.P2)
+        }
         this.props.logOut()
     }
 
@@ -44,7 +47,6 @@ class GameContainer extends React.Component {
 
         setTimeout(() => {
             this.updateUser(this.props.P2)
-            this.props.updateUsersInState(this.props.P1, this.props.P2)
             console.log('update in the timer')
         }, 2000);
     }
