@@ -38,7 +38,7 @@ class Login extends React.Component {
     render() {
 
         if (this.state.ready) {
-            return <Redirect to='/start' />
+            return <Redirect to='/game' />
         }
         return (
             <div id='login'>
