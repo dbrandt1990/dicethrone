@@ -12,7 +12,9 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
+        if(!this.props.loggedIn){
         this.props.resetState()
+        }
     }
 
     handleChange = (e) => {
@@ -37,7 +39,7 @@ class Login extends React.Component {
 
     render() {
 
-        if (this.state.ready) {
+        if (this.state.ready || this.props.loggedIn) {
             return <Redirect to='/game' />
         }
         return (
@@ -60,7 +62,7 @@ class Login extends React.Component {
 const mapStateToProps = state => {
     return {
         allUsers: state.manageUsers.allUsers,
-        gameState: state.manageGame
+        loggedIn: state.manageGame.loggedIn
     }
 }
 

@@ -8,8 +8,10 @@ import { Link } from "react-router-dom";
 class GameContainer extends React.Component {
     
     componentWillUnmount() {
-        console.log('unmounting and updating')
-        this.updateAfterWin()
+        if(this.props.won){
+            console.log('unmounting and updating')
+            this.updateAfterWin()
+        }
     }
 
     updateUser = (player) => {
