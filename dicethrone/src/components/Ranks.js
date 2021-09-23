@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 const Ranks = (props) => {
 
-    // const history = useHistory()
+    const history = useHistory()
 
     const renderUsers = () => {
         return props.allUsers.map(u => {
@@ -23,7 +23,7 @@ const Ranks = (props) => {
     return (
         <div id='leaderBoard'>
             <h1 id='ranksLabel'>Leader Board</h1>
-            {/* <button className='btn btn-warning' onClick={() => history.push('/')}>Back</button> */}
+            <button className='btn btn-warning' onClick={() => history.push('/')}>Back</button>
             <table>
                 <thead>
                     <tr>

@@ -5,11 +5,15 @@ import { connect } from 'react-redux';
 class HomePage extends React.Component {
 
     componentDidMount() {
-        this.fetchUsers();
-        this.timer = setInterval(() => {
-            this.fetchUsers()
-            console.log('Users added at mount', this.props.allUsers)
-        }, 5000);
+        
+        if(!this.props.loggedIn){
+            this.fetchUsers();
+            this.timer = setInterval(() => {
+
+                this.fetchUsers()
+                console.log('Users added at mount', this.props.allUsers)
+            }, 5000);
+    }
     }
 
     clearTimer = () => {
@@ -37,6 +41,7 @@ class HomePage extends React.Component {
                     <NavLink className='btn btn-info' to='/signup'>Sign Up</NavLink>
                     <NavLink className='btn btn-info' to='/login'>Start Game</NavLink>
                     <NavLink className='btn btn-info' to='/ranks'>Leader Board</NavLink>
+                    <NavLink className='btn btn-info' to='/rules'>Rules</NavLink>
                 </div>
             )
         }
@@ -56,7 +61,8 @@ class HomePage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        allUsers: state.manageUsers.allUsers
+        allUsers: state.manageUsers.allUsers,
+        loggedIn: state.manageGame.loggedIn
     }
 }
 

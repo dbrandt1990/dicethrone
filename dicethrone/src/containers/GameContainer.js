@@ -3,13 +3,10 @@ import Player1Container from "./Player1Container";
 import Player2Container from "./Player2Container";
 import React from "react";
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router'
-
-
-
+import { Redirect } from 'react-router';
+import { Link } from "react-router-dom";
 class GameContainer extends React.Component {
-
-
+    
     componentWillUnmount() {
         console.log('unmounting and updating')
         this.updateAfterWin()
@@ -59,6 +56,7 @@ class GameContainer extends React.Component {
                 <Player2Container />
                 <DiceContainer />
                 <button className={this.props.won ? 'btn btn-success' : 'btn btn-danger'} id='exitGame' onClick={this.handleExit}>Exit</button>
+                <Link className='btn btn-info' id='rulesBtn' to='/rules'>Rules</Link>
             </div>
         )
     }

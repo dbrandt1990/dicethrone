@@ -35,6 +35,20 @@ code {
 }
 
 /* TODO: change colors of buttons to indicate a need to click, and position rollText in upper center*/
+#rulesBtn {
+  position: absolute;
+  top: 50%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+
+#rulesPage {
+  position: absolute;
+  top: 15px;
+}
+li {
+  list-style-type: none;
+}
 
 .fadeout {
   animation: fadeout 4s;
