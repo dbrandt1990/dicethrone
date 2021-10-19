@@ -1,12 +1,12 @@
 # DiceGame
 
-This is a local two player dice game.
-
 ## Description
 
-This game is a battle between two players. You will attack and heal based on the results of 5 dice.
+This game is a local two player dice game where players battle with their dice rolls. You will attack and heal based on the results of 5 dice.
 Dice maybe re-rolled up to three time to try and achive the desired effects. Roll all 6's and land your
 Ultimate attack!
+
+🎥 https://youtu.be/cZXOlx-s6Rw
 
 ## Getting Started
 
