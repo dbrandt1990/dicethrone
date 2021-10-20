@@ -6,9 +6,9 @@ This game is a local two player dice game where players battle with their dice r
 Dice maybe re-rolled up to three time to try and achive the desired effects. Roll all 6's and land your
 Ultimate attack!
 
-[Check it out!]("https://media.giphy.com/media/OnKDrnuoWjdfaHSv28/giphy.gif")
+![Check it out!]("https://media.giphy.com/media/OnKDrnuoWjdfaHSv28/giphy.gif")
 
-🎥 https://youtu.be/cZXOlx-s6Rw
+[🎥 Video walktrough](https://youtu.be/cZXOlx-s6Rw)
 
 ## Getting Started
 
