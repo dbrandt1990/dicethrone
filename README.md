@@ -34,7 +34,7 @@ npm install
 npm start
 ```
 * Once npm start is complete open a new terminal and cd backend
-*Run
+* Run
 ```
 rails s
 ```
