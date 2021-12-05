@@ -28,7 +28,7 @@ class GameContainer extends React.Component {
         })
             .then(res => res.json())
             .then(res => {
-                console.log("results from patch", res);
+                console.log("results from patching User", res);
             })
             .catch(err => console.error(err.full_messages))
     }
@@ -46,7 +46,6 @@ class GameContainer extends React.Component {
 
         setTimeout(() => {
             this.updateUser(this.props.P2)
-            console.log('update in the timer')
         }, 2000);
     }
 

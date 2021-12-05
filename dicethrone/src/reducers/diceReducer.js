@@ -237,7 +237,7 @@ export const manageUsers = (state = initialUser, action) => {
                 allUsers: sorted
             }
         }
-        case 'UPDATE_USERS': {
+        case 'UPDATE_LEADERBOARD': {
             let updatedArr = []
             let p1 = action.p1
             let p2 = action.p2

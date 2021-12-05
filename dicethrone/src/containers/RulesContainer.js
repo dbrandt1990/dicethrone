@@ -36,7 +36,7 @@ const Rules = (props) => {
                     <div className='dieP2' id='die1'>
                     <span className={skull}>6</span>
                     </div>
-                    <p>Yout ultimate attack does 18 damge to your opponent.</p>
+                    <p>This is your ultimate attack, it does 18 damge to your opponent.</p>
                 </li>
                 <li>
                     <div className='dieP1' id='die1'>
