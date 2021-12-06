@@ -14,7 +14,7 @@ class GameContainer extends React.Component {
         }
     }
 
-    updateUser = (player) => {
+    updateWins = (player) => {
         // patch request to update users wins and losses if game won
         fetch(`http://localhost:3000/api/user/${player.id}`, {
             method: 'PATCH',
@@ -36,16 +36,16 @@ class GameContainer extends React.Component {
     handleExit = (e) => {
         e.preventDefault()
         if(this.props.won){
-            this.props.updateUsersInState(this.props.P1, this.props.P2)
+            this.props.updateLeaderboard(this.props.P1, this.props.P2)
         }
         this.props.logOut()
     }
 
     updateAfterWin = async () => {
-        await this.updateUser(this.props.P1)
+        await this.updateWins(this.props.P1)
 
         setTimeout(() => {
-            this.updateUser(this.props.P2)
+            this.updateWins(this.props.P2)
         }, 2000);
     }
 
@@ -76,7 +76,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         logOut: () => dispatch({ type: 'LOG_OUT' }),
-        updateUsersInState: (p1, p2) => dispatch({ type: 'UPDATE_USERS', p1, p2 })
+        updateLeaderboard: (p1, p2) => dispatch({ type: 'UPDATE_LEADERBOARD', p1, p2 }),
+        updateWins: (player) => dispatch({type: 'UPDATE_WINS', player})
     }
 }
 

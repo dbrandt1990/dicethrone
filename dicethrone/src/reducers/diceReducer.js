@@ -54,12 +54,21 @@ export const manageGame = (state = initialGame, action) => {
                 return user.username === P2
             })
 
+            if(P1_confirmed.length > 0 && P2_confirmed.length > 0){
             return state = {
                 ...state,
                 P1: P1_confirmed[0],
                 P2: P2_confirmed[0],
                 loggedIn: true
             }
+          }else{
+              return state = {
+                ...state,
+                P1: '',
+                P2: '',
+                loggedIn: false
+            } 
+          }
         }
         case 'RESOLVE_DICE': {
             let opponentHP = state.turn === 'P1' ? state.P2HP : state.P1HP
@@ -236,6 +245,23 @@ export const manageUsers = (state = initialUser, action) => {
                 ...state,
                 allUsers: sorted
             }
+        }
+        case 'UPDATE_WINS': {
+            return fetch(`http://localhost:3000/api/user/${action.player.id}`, {
+                method: 'PATCH',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    '_method': 'PATCH',
+                    'Authorization': ''
+                },
+                body: JSON.stringify(action.player)
+            })
+                .then(res => res.json())
+                .then(res => {
+                    console.log("results from patching User", res);
+                })
+                .catch(err => console.error(err.full_messages))
         }
         case 'UPDATE_LEADERBOARD': {
             let updatedArr = []

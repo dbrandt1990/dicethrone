@@ -26,9 +26,14 @@ class Login extends React.Component {
         let P1 = this.state.username1
         let P2 = this.state.username2
         let allUsersArr = this.props.allUsers
+        let inputP1= document.getElementById('inputP1')
+        let inputP2= document.getElementById('inputP2')
+
         this.props.confirmUsers(P1, P2, allUsersArr)
 
-        if (this.state.username1 !== '' && this.state.username2 !== '')
+            inputP1.value = ''
+            inputP2.value =''
+
             this.setState({
                 username1: '',
                 username2: '',
@@ -39,7 +44,7 @@ class Login extends React.Component {
 
     render() {
 
-        if (this.state.ready || this.props.loggedIn) {
+        if (this.props.loggedIn) {
             return <Redirect to='/game' />
         }
         return (
@@ -48,9 +53,9 @@ class Login extends React.Component {
                     <div id='loginInputs'>
                         <h3>Login</h3>
                         <label>Player 1: </label>
-                        <input onChange={this.handleChange} type='text' name='username1' placeholder='username' /><br />
+                        <input onChange={this.handleChange} type='text' id='inputP1' name='username1' placeholder='username' /><br />
                         <label>Player 2: </label>
-                        <input onChange={this.handleChange} type='text' name='username2' placeholder='username' /><br />
+                        <input onChange={this.handleChange} type='text' id='inputP2' name='username2' placeholder='username' /><br />
                     </div>
                     <button className='btn btn-warning' type='submit'>Start Game</button>
                 </form>

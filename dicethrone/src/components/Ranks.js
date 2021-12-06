@@ -8,6 +8,7 @@ const Ranks = (props) => {
     const history = useHistory()
 
     const renderUsers = () => {
+        if(props.allUsers){
         return props.allUsers.map(u => {
             return (
                 <tr key={u.id}>
@@ -18,6 +19,9 @@ const Ranks = (props) => {
                 </tr>
             )
         })
+      }else{
+          return <tr>Someting Went Wrong :(</tr>
+      }
     }
 
     return (

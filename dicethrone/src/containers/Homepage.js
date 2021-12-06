@@ -26,7 +26,7 @@ class HomePage extends React.Component {
             const response = await fetch("http://localhost:3000/api/user")
             const json = await response.json()
             this.props.setUsers(json.users)
-            console.log('GET_USERS called from hompage')
+            console.log('GET_USERS called from hompage', json)
         } catch (err) {
             console.log(err)
         }
