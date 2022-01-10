@@ -6,6 +6,12 @@ import useSound from 'use-sound';
 
 class DiceContainer extends React.Component {
 
+    RollButton = () => {
+        const [play] = useSound(boopSfx);
+      
+        return <button onClick={play}>Roll</button>;
+      };
+
     handleClick = (e) => {
         //getting the number of the die from the id and making it the index value
         let index = e.currentTarget.id[3] - 1
@@ -71,7 +77,8 @@ class DiceContainer extends React.Component {
         }
         return(
             <div id='rollButtons'>
-            <button className='btn btn-success' id='roll' onClick={this.handleRoll}>Roll</button>
+            {this.RollButton}
+            {/* <button className='btn btn-success' id='roll' onClick={this.handleRoll}>Roll</button> */}
             <button className='btn btn-warning' id='finishTurn' onClick={this.finishTurn}>Finish</button>
             </div>
         )
