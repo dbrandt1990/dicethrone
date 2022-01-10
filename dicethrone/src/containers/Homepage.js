@@ -6,14 +6,14 @@ class HomePage extends React.Component {
 
     componentDidMount() {
         
-        if(!this.props.loggedIn){
+        // if(!this.props.loggedIn){
             this.fetchUsers();
             this.timer = setInterval(() => {
 
                 this.fetchUsers()
                 console.log('Users added at mount', this.props.allUsers)
             }, 5000);
-    }
+    // }
     }
 
     clearTimer = () => {

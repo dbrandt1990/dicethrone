@@ -1,6 +1,8 @@
 import React from 'react'
 import { Dice } from '../components/Dice'
 import { connect } from 'react-redux'
+import useSound from 'use-sound';
+
 
 class DiceContainer extends React.Component {
 
